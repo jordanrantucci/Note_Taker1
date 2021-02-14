@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
 // data
-const notes = []
+
 // routes
 //--------------------
 //send user first to homepage
@@ -25,17 +25,17 @@ app.get('/notes', function (req, res) {
 //display all notes
 app.get('/api/notes', function (req, res) {
     res.sendFile(path.join(__dirname, './db/db.json'), 'utf8', (err, data) => {
-        // if (err) throw err
-        //  res.app(JSON.parse(data))
     })
 })
+
 //create new note
 app.post('/api/notes', function (req, res) {
-    const newNote = req.body
-    // newNote.id = newNote.title.replace(/\s+/g, '').toLowerCase()
-    notes.push(newNote)
-    res.json(newNote)
-    console.log(newNote)
+    fs.readFile('./db/db.json', 'utf-8', (err,data) => {
+        if(err) throw err
+        const allNotes = JSON.parse(data)
+        console.log(allNotes)
+    })
+  
 })
 //delete
 app.delete('/api/notes/:id', function (req, res) {
