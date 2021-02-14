@@ -1,7 +1,7 @@
 {
   "name": "note_taker1",
   "version": "1.0.0",
-  "description": "",
+  "description": "An app used to save, view and delete notes",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
