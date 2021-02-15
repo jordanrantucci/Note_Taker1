@@ -28,18 +28,49 @@ app.get('/api/notes', function (req, res) {
     })
 })
 
-//create new note
+//create new note by reading file and then write the file into the db.json file
 app.post('/api/notes', function (req, res) {
     fs.readFile('./db/db.json', 'utf-8', (err,data) => {
         if(err) throw err
         const allNotes = JSON.parse(data)
         console.log(allNotes)
+        // define the new note and make a unique ID
+        const newNote = req.body
+        // use a for loop to add new notes to a unique ID
+
+        for(i=0; i<allNotes.length; i++){
+            newNote.id = i
+        }
+        console.log(newNote.id)
+        allNotes.push(newNote)
+        console.log(allNotes)
+        fs.writeFile('./db/db.json', JSON.stringify(allNotes), (err) => {
+            if(err) {
+                console.log(err)
+                res.json(allNotes)
+            }
+        })
     })
-  
 })
+
 //delete
 app.delete('/api/notes/:id', function (req, res) {
     const id = req.params.id
+    // we will need to read the db.json
+    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+        if(err) throw err
+        const allNotes = JSON.parse(data)
+        for(i=0; i < allNotes.length+1;i++){
+            console.log(allNotes.id[i])
+            if(allNotes.id !== id){
+                allNotes.splice(i,1)
+             //splice is used to add/remove items to/from an array and returns the removed items
+            }
+        }
+        fs.writeFile('./db/db.json', JSON.stringify(allNotes), (err) => {
+            if(err) throw err
+        })
+    })
 })
 // listener
 app.listen(PORT, () => {
