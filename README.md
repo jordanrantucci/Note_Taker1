@@ -30,7 +30,7 @@ AS A USER I would like a simple application that I can take notes digitally with
 node.js, NPM express
 
 ## Usage
-The project is used for taking notes
+The project is used for taking notes and can be found here: https://murmuring-taiga-63819.herokuapp.com/ 
 
 My Tests
 ![Alt Text](public/assets/demo.gif)
