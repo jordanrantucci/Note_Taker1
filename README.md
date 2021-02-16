@@ -27,7 +27,7 @@ AS A USER I would like a simple application that I can take notes digitally with
 * [Contact](#contact)
 
 ## Installation
-node.js, NPMs: inquirer and jest   
+node.js, NPM express
 
 ## Usage
 The project is used for taking notes
